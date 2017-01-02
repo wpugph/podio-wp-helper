@@ -25,6 +25,7 @@ require_once( 'includes/class-pd-helper-settings.php' );
 
 // Load plugin libraries
 require_once( 'includes/lib/class-pd-helper-admin-api.php' );
+require_once( 'includes/podio/PodioAPI.php' );
 
 /**
  * Returns the main instance of PD_helper to prevent the need to use globals.
