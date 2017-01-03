@@ -39,7 +39,7 @@ class PD_helper_Settings {
 	public function __construct ( $parent ) {
 		$this->parent = $parent;
 
-		$this->base = 'wpt_';
+		$this->base = 'pdhs1_';
 
 		// Initialise settings
 		add_action( 'init', array( $this, 'init_settings' ), 11 );
@@ -68,7 +68,12 @@ class PD_helper_Settings {
 	 * @return void
 	 */
 	public function add_menu_item () {
-		$page = add_options_page( __( 'Plugin Settings', 'pd-helper' ) , __( 'Plugin Settings', 'pd-helper' ) , 'manage_options' , $this->parent->_token . '_settings' ,  array( $this, 'settings_page' ) );
+		$page = add_options_page( __(
+			'Podio Helper Settings', 'pd-helper' ) ,
+			__( 'Podio Helper Settings', 'pd-helper' ) ,
+			'manage_options' ,
+			$this->parent->_token . '_settings' ,
+			array( $this, 'settings_page' ) );
 		add_action( 'admin_print_styles-' . $page, array( $this, 'settings_assets' ) );
 	}
 
@@ -109,9 +114,17 @@ class PD_helper_Settings {
 	private function settings_fields () {
 
 		$settings['standard'] = array(
-			'title'					=> __( 'Standard', 'pd-helper' ),
-			'description'			=> __( 'These are fairly standard form input fields.', 'pd-helper' ),
+			'title'					=> __( 'Podio Helper Settings', 'pd-helper' ),
+			'description'			=> __( 'Podio Helper Settings.', 'pd-helper' ),
 			'fields'				=> array(
+				array(
+					'id' 			=> 'single_checkbox',
+					'label'			=> __( 'An Option', 'pd-helper' ),
+					'description'	=> __( 'A standard checkbox - if you save this option as checked then it will store the option as \'on\', otherwise it will be an empty string.', 'pd-helper' ),
+					'type'			=> 'checkbox',
+					'default'		=> ''
+				),
+
 				array(
 					'id' 			=> 'text_field',
 					'label'			=> __( 'Some Text' , 'pd-helper' ),
@@ -174,44 +187,6 @@ class PD_helper_Settings {
 					'type'			=> 'checkbox_multi',
 					'options'		=> array( 'square' => 'Square', 'circle' => 'Circle', 'rectangle' => 'Rectangle', 'triangle' => 'Triangle' ),
 					'default'		=> array( 'circle', 'triangle' )
-				)
-			)
-		);
-
-		$settings['extra'] = array(
-			'title'					=> __( 'Extra', 'pd-helper' ),
-			'description'			=> __( 'These are some extra input fields that maybe aren\'t as common as the others.', 'pd-helper' ),
-			'fields'				=> array(
-				array(
-					'id' 			=> 'number_field',
-					'label'			=> __( 'A Number' , 'pd-helper' ),
-					'description'	=> __( 'This is a standard number field - if this field contains anything other than numbers then the form will not be submitted.', 'pd-helper' ),
-					'type'			=> 'number',
-					'default'		=> '',
-					'placeholder'	=> __( '42', 'pd-helper' )
-				),
-				array(
-					'id' 			=> 'colour_picker',
-					'label'			=> __( 'Pick a colour', 'pd-helper' ),
-					'description'	=> __( 'This uses WordPress\' built-in colour picker - the option is stored as the colour\'s hex code.', 'pd-helper' ),
-					'type'			=> 'color',
-					'default'		=> '#21759B'
-				),
-				array(
-					'id' 			=> 'an_image',
-					'label'			=> __( 'An Image' , 'pd-helper' ),
-					'description'	=> __( 'This will upload an image to your media library and store the attachment ID in the option field. Once you have uploaded an imge the thumbnail will display above these buttons.', 'pd-helper' ),
-					'type'			=> 'image',
-					'default'		=> '',
-					'placeholder'	=> ''
-				),
-				array(
-					'id' 			=> 'multi_select_box',
-					'label'			=> __( 'A Multi-Select Box', 'pd-helper' ),
-					'description'	=> __( 'A standard multi-select box - the saved data is stored as an array.', 'pd-helper' ),
-					'type'			=> 'select_multi',
-					'options'		=> array( 'linux' => 'Linux', 'mac' => 'Mac', 'windows' => 'Windows' ),
-					'default'		=> array( 'linux' )
 				)
 			)
 		);
@@ -279,7 +254,7 @@ class PD_helper_Settings {
 
 		// Build page HTML
 		$html = '<div class="wrap" id="' . $this->parent->_token . '_settings">' . "\n";
-			$html .= '<h2>' . __( 'Plugin Settings' , 'pd-helper' ) . '</h2>' . "\n";
+			$html .= '<h2>' . __( 'Podio Helper Plugin Settings' , 'pd-helper' ) . '</h2>' . "\n";
 
 			$tab = '';
 			if ( isset( $_GET['tab'] ) && $_GET['tab'] ) {
