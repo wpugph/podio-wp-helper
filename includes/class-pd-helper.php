@@ -94,7 +94,7 @@ class PD_helper {
 
 		$this->script_suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
-		register_activation_hook( $this->file, array( $this, 'install' ) );
+
 
 		// Load frontend JS & CSS
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ), 10 );
@@ -108,6 +108,10 @@ class PD_helper {
 		if ( is_admin() ) {
 			$this->admin = new PD_helper_Admin_API();
 		}
+
+		register_activation_hook( $this->file, array( $this, 'install' ) );
+
+		register_deactivation_hook( $this->file, array( $this, 'plugin_deactivated' ) );
 
 		// Handle localisation
 		$this->load_plugin_textdomain();
@@ -254,13 +258,59 @@ class PD_helper {
 
 	/**
 	 * Installation. Runs on activation.
+	 * If reset option is still new meaning this is the first time th plugins is installed, it will call all the default values
 	 * @access  public
 	 * @since   1.0.0
 	 * @return  void
 	 */
 	public function install () {
 		$this->_log_version_number();
+		if ( ( empty ( get_option ('pdhs1_cb_reset') ) ) ) {
+			$this->default_option_values ();
+		}
 	} // End install ()
+
+	/**
+	 *  This contains the default values
+	 * @access  public
+	 * @since   1.0.0
+	 * @return  void
+	 */
+	public function default_option_values () {
+		add_option ( 'pdhs1_cb_libs', on );
+		add_option ( 'pdhs1_cb_mods', on );
+		add_option ( 'pdhs1_cb_reset', '' );
+	}
+
+	/**
+	 *  Deletes all options in the specified array
+	 * @access  public
+	 * @since   1.0.0
+	 * @param  array $option_names      names of the options to be deleted
+	 * @return  void
+	 */
+	public function remove_all_options ( $option_names ) {
+		foreach ( $option_names as $option_name ) {
+			delete_option ( $option_name );
+		}
+	}
+
+	/**
+	 *  Runs when plugin is deactivated.
+	 * @access  public
+	 * @since   1.0.0
+	 * @return  void
+	 */
+	public function plugin_deactivated () {
+		if ( !empty ( get_option ( 'pdhs1_cb_reset' ) ) ) {
+			$option_names = array(
+					'pdhs1_cb_libs',
+					'pdhs1_cb_mods',
+					'pdhs1_cb_reset',
+				);
+			$this->remove_all_options ( $option_names );
+		}
+	}
 
 	/**
 	 * Log the plugin version number.

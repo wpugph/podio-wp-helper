@@ -112,89 +112,31 @@ class PD_helper_Settings {
 	 * @return array Fields to be displayed on settings page
 	 */
 	private function settings_fields () {
-
 		$settings['standard'] = array(
 			'title'					=> __( 'Podio Helper Settings', 'pd-helper' ),
 			'description'			=> __( 'Podio Helper Settings.', 'pd-helper' ),
 			'fields'				=> array(
 				array(
-					'id' 			=> 'cb_pd_modules',
-					'label'			=> __( 'Load Modules', 'pd-helper' ),
-					'description'	=> __( 'Load Podio Modules' , 'pd-helper' ),
+					'id' 			=> 'cb_libs',
+					'label'			=> __( 'Enable all libraries', 'pd-helper' ),
+					'description'	=> __( 'Enable all Podio libraries', 'pd-helper' ),
+					'type'			=> 'checkbox',
+					'default'		=> 'true'
+				),
+				array(
+					'id' 			=> 'cb_mods',
+					'label'			=> __( 'Enable all modules', 'pd-helper' ),
+					'description'	=> __( 'Enable all Podio modules', 'pd-helper' ),
 					'type'			=> 'checkbox',
 					'default'		=> ''
 				),
 				array(
-					'id' 			=> 'cb_pd_libs',
-					'label'			=> __( 'Load library', 'pd-helper' ),
-					'description'	=> __( 'Load Podio Library' , 'pd-helper' ), 'pd-helper' ),
+					'id' 			=> 'cb_reset',
+					'label'			=> __( 'Reset Default Settings ', 'pd-helper' ),
+					'description'	=> __( 'Reset default settings when plugin is disabled or deactivated', 'pd-helper' ),
 					'type'			=> 'checkbox',
 					'default'		=> ''
 				),
-
-				array(
-					'id' 			=> 'text_field',
-					'label'			=> __( 'Some Text' , 'pd-helper' ),
-					'description'	=> __( 'This is a standard text field.', 'pd-helper' ),
-					'type'			=> 'text',
-					'default'		=> '',
-					'placeholder'	=> __( 'Placeholder text', 'pd-helper' )
-				),
-				array(
-					'id' 			=> 'password_field',
-					'label'			=> __( 'A Password' , 'pd-helper' ),
-					'description'	=> __( 'This is a standard password field.', 'pd-helper' ),
-					'type'			=> 'password',
-					'default'		=> '',
-					'placeholder'	=> __( 'Placeholder text', 'pd-helper' )
-				),
-				array(
-					'id' 			=> 'secret_text_field',
-					'label'			=> __( 'Some Secret Text' , 'pd-helper' ),
-					'description'	=> __( 'This is a secret text field - any data saved here will not be displayed after the page has reloaded, but it will be saved.', 'pd-helper' ),
-					'type'			=> 'text_secret',
-					'default'		=> '',
-					'placeholder'	=> __( 'Placeholder text', 'pd-helper' )
-				),
-				array(
-					'id' 			=> 'text_block',
-					'label'			=> __( 'A Text Block' , 'pd-helper' ),
-					'description'	=> __( 'This is a standard text area.', 'pd-helper' ),
-					'type'			=> 'textarea',
-					'default'		=> '',
-					'placeholder'	=> __( 'Placeholder text for this textarea', 'pd-helper' )
-				),
-				array(
-					'id' 			=> 'single_checkbox',
-					'label'			=> __( 'An Option', 'pd-helper' ),
-					'description'	=> __( 'A standard checkbox - if you save this option as checked then it will store the option as \'on\', otherwise it will be an empty string.', 'pd-helper' ),
-					'type'			=> 'checkbox',
-					'default'		=> ''
-				),
-				array(
-					'id' 			=> 'select_box',
-					'label'			=> __( 'A Select Box', 'pd-helper' ),
-					'description'	=> __( 'A standard select box.', 'pd-helper' ),
-					'type'			=> 'select',
-					'options'		=> array( 'drupal' => 'Drupal', 'joomla' => 'Joomla', 'wordpress' => 'WordPress' ),
-					'default'		=> 'wordpress'
-				),
-				array(
-					'id' 			=> 'radio_buttons',
-					'label'			=> __( 'Some Options', 'pd-helper' ),
-					'description'	=> __( 'A standard set of radio buttons.', 'pd-helper' ),
-					'type'			=> 'radio',
-					'options'		=> array( 'superman' => 'Superman', 'batman' => 'Batman', 'ironman' => 'Iron Man' ),
-					'default'		=> 'batman'
-				),
-				array(
-					'id' 			=> 'multiple_checkboxes',
-					'label'			=> __( 'Some Items', 'pd-helper' ),
-					'description'	=> __( 'You can select multiple items and they will be stored as an array.', 'pd-helper' ),
-					'type'			=> 'checkbox_multi',
-					'options'		=> array( 'square' => 'Square', 'circle' => 'Circle', 'rectangle' => 'Rectangle', 'triangle' => 'Triangle' ),
-					'default'		=> array( 'circle', 'triangle' )
-				)
 			)
 		);
 
