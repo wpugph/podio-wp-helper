@@ -118,9 +118,16 @@ class PD_helper_Settings {
 			'description'			=> __( 'Podio Helper Settings.', 'pd-helper' ),
 			'fields'				=> array(
 				array(
-					'id' 			=> 'single_checkbox',
-					'label'			=> __( 'An Option', 'pd-helper' ),
-					'description'	=> __( 'A standard checkbox - if you save this option as checked then it will store the option as \'on\', otherwise it will be an empty string.', 'pd-helper' ),
+					'id' 			=> 'cb_pd_modules',
+					'label'			=> __( 'Load Modules', 'pd-helper' ),
+					'description'	=> __( 'Load Podio Modules' , 'pd-helper' ),
+					'type'			=> 'checkbox',
+					'default'		=> ''
+				),
+				array(
+					'id' 			=> 'cb_pd_libs',
+					'label'			=> __( 'Load library', 'pd-helper' ),
+					'description'	=> __( 'Load Podio Library' , 'pd-helper' ), 'pd-helper' ),
 					'type'			=> 'checkbox',
 					'default'		=> ''
 				),
